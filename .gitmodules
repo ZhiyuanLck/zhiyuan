@@ -1,18 +1,18 @@
 [submodule "zsh/plugins/zsh-syntax-highlighting"]
 	path = zsh/plugins/zsh-syntax-highlighting
-	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+	url = https://hub.fastgit.org/zsh-users/zsh-syntax-highlighting.git
 [submodule "zsh/plugins/zsh-autosuggestions"]
 	path = zsh/plugins/zsh-autosuggestions
-	url = https://github.com/zsh-users/zsh-autosuggestions.git
+	url = https://hub.fastgit.org/zsh-users/zsh-autosuggestions.git
 [submodule "zsh/plugins/zsh-history-substring-search"]
 	path = zsh/plugins/zsh-history-substring-search
-	url = https://github.com/zsh-users/zsh-history-substring-search.git
+	url = https://hub.fastgit.org/zsh-users/zsh-history-substring-search.git
 [submodule "zsh/plugins/autopair"]
 	path = zsh/plugins/autopair
-	url = https://github.com/hlissner/zsh-autopair.git
+	url = https://hub.fastgit.org/hlissner/zsh-autopair.git
 [submodule "zsh/plugins/zsh-vi-mode"]
 	path = zsh/plugins/zsh-vi-mode
-	url = https://github.com/jeffreytse/zsh-vi-mode.git
+	url = https://hub.fastgit.org/jeffreytse/zsh-vi-mode.git
 [submodule "cli-tool/z.lua"]
 	path = cli-tool/z.lua
-	url = https://github.com/skywind3000/z.lua.git
+	url = https://hub.fastgit.org/skywind3000/z.lua.git
