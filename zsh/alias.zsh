@@ -49,3 +49,7 @@ alias gsmu='git submodule update --init --recursive'
 # ----------------------
 # Git log find by commit message
 function glf() { git log --all --grep="$1"; }
+
+
+# 重载
+alias reload="source ~/.zshrc"
