@@ -53,3 +53,15 @@ function glf() { git log --all --grep="$1"; }
 
 # 重载
 alias reload="source ~/.zshrc"
+
+# 自定义脚本
+call_func() {
+  local script=$zhiyuan/scripts/$1.sh
+  if [[ -f $script ]]; then
+    bash $script
+  else
+    echo "$script not found"
+  fi
+}
+
+alias zy="call_func"

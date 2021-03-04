@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+echo "installing necessary packages..."
+./package.sh
+
+echo "configuring git..."
+git config --global user.name "ZhiyuanLck"
+git config --global user.email "lichangkai225@qq.com"
+
 export zhiyuan=~/.config/zhiyuan
 
 echo "updating submodules..."
