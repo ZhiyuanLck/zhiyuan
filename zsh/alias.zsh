@@ -55,7 +55,7 @@ function glf() { git log --all --grep="$1"; }
 alias reload="source ~/.zshrc"
 
 # 自定义脚本
-call_func() {
+zy() {
   local script=$zhiyuan/scripts/$1.sh
   if [[ -f $script ]]; then
     bash $script
@@ -64,4 +64,7 @@ call_func() {
   fi
 }
 
-alias zy="call_func"
+# mkdir && cd
+mk() {
+  mkdir -p $1 && cd $1
+}
