@@ -58,7 +58,7 @@ alias reload="source ~/.zshrc"
 zy() {
   local script=$zhiyuan/scripts/$1.sh
   if [[ -f $script ]]; then
-    bash $script
+    bash $script ${@:2} # 丢掉第一个参数
   else
     echo "$script not found"
   fi
