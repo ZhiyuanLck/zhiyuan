@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export zhiyuan=~/.config/zhiyuan
+zhiyuan=~/.config/zhiyuan
 source $zhiyuan/log.sh
 rm -f $zhiyuan/LOG
 

@@ -1,18 +1,19 @@
 #!/usr/bin/env zsh
 
-local main_dir=$zhiyuan/zsh
+zhiyuan=~/.config/zhiyuan
+main_dir=$zhiyuan/zsh
 
 # fzf key-bindings
 echo "downloading fzf zsh key-bindings..."
-local fzf_dir=$main_dir/plugins/fzf
-local fzf_key=$fzf_dir/key-bindings.zsh
+fzf_dir=$main_dir/plugins/fzf
+fzf_key=$fzf_dir/key-bindings.zsh
 mkdir -p $fzf_dir
 curl -o $fzf_key https://raw.fastgit.org/junegunn/fzf/master/shell/key-bindings.zsh
 
 # command not found
 echo "downloading zsh plugin command-not-found"
-local cnf_dir=$main_dir/plugins/command-not-found
-local cnf=$cnf_dir/command-not-found.zsh
+cnf_dir=$main_dir/plugins/command-not-found
+cnf=$cnf_dir/command-not-found.zsh
 mkdir -p $cnf_dir
 curl -o $cnf https://raw.fastgit.org/ohmyzsh/ohmyzsh/master/plugins/command-not-found/command-not-found.plugin.zsh
 
