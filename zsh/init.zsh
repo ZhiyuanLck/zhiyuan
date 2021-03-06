@@ -1,4 +1,4 @@
-zhiyuan=${zhiyuan:-"~/.config/zhiyuan"}
+zhiyuan=${zhiyuan:-"$HOME/.config/zhiyuan"}
 TEX=${TEX:-"/usr/local/texlive/2020"}
 load () {
   local zsh_path=$zhiyuan/zsh
