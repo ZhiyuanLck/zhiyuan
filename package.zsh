@@ -1,20 +1,18 @@
 #!/usr/bin/env zsh
 
-if [ -f /etc/lsb-release -o -d /etc/lsb-release.d ]; then
-  OS=$(lsb_release -i | cut -d: -f2 | sed s/'^\t'//)
-else
-  OS=$(ls -d /etc/[A-Za-z]*[_-][rv]e[lr]* | grep -v "lsb" | cut -d'/' -f3 | cut -d'-' -f1 | cut -d'_' -f1)
-fi
-
-packages=(git curl wget zsh
-  alacritty xclip ncdu
-)
-
-if [[ $OS == "Ubuntu" ]]; then
-  sudo apt install -y git curl wget zsh xclip ncdu
-elif [[ $OS == "Arch" ]]; then
-  sudo pacman -S $packages
-fi
-
 # Package  Ubuntu Arch
 # basetool x      o
+
+zhiyuan=$HOME/.config/zhiyuan
+fpath=( $zhiyuan/zsh/functions $fpath)
+autoload -Uz os
+
+packages=(git curl wget zsh
+  alacritty xclip ncdu tree
+)
+
+if os "Ubuntu"; then
+  sudo apt install -y git curl wget zsh xclip ncdu tree
+elif os "Arch"; then
+  sudo pacman -S $packages
+fi

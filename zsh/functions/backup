@@ -1,0 +1,6 @@
+# vim: ft=zsh
+
+# $1 要备份的文件
+# $2 备份后的文件后缀
+mkdir -p $HOME/.bak/$2
+[[ -f $1 ]] && cp $1 $HOME/.bak/$2/$(date +"%Y-%d-%m+%T")

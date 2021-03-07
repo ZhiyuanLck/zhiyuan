@@ -1,8 +1,16 @@
 autoload -Uz colors && colors
-local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ %s)"
-local prompt_path="%{$fg_bold[blue]%}%/"
-PROMPT="$prompt_path
-$ret_status%{$reset_color%}"
 
-# show conda environment name
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(anaconda ...ENVS)
+ret_status="%(?:%F{85}➜ :%F{196}➜ )%f"
+prompt_path="%F{211}%/%f"
+_conda() {
+  if [[ -n $CONDA_DEFAULT_ENV ]]; then
+    echo "%F{36}($CONDA_DEFAULT_ENV)%f "
+  fi
+}
+
+precmd() {
+  ps1_left="$(_conda)$prompt_path" # to be completed
+  local left=$((COLUMNS - #ps1_left % $COLUMNS))
+  PROMPT="%B$ps1_left${(l:$left:: :)$(date +'%T')}
+$ret_status%b"
+}

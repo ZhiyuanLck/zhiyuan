@@ -4,8 +4,7 @@ zhiyuan=$HOME/.config/zhiyuan
 fpath=( $zhiyuan/zsh/functions $fpath)
 autoload -Uz has_cmd rich && rich
 
-source $zhiyuan/log.sh
-rm -f $zhiyuan/LOG
+rm -f $zhiyuan/LOG # 删除之前的log
 
 std "installing necessary packages..."
 ./package.zsh

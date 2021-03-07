@@ -3,7 +3,8 @@
 zhiyuan=$HOME/.config/zhiyuan
 main_dir=$zhiyuan/zsh
 fpath=( $main_dir/functions $fpath)
-autoload -Uz has_cmd rich && rich
+autoload -Uz has_cmd backup
+autoload -Uz rich && rich
 
 # fzf key-bindings
 std "downloading fzf zsh key-bindings..."
@@ -21,7 +22,7 @@ curl -o $cnf https://raw.fastgit.org/ohmyzsh/ohmyzsh/master/plugins/command-not-
 
 # 备份
 std "backup old .zshrc and generating new"
-[[ -e $HOME/.zshrc ]] && cp $HOME/.zshrc $HOME/.zshrc.bak
+backup $HOME/.zshrc zshrc
 echo "source $main_dir/init.zsh" > $HOME/.zshrc
 
 # 设置tex路径
@@ -45,23 +46,7 @@ EOF
 done
 
 # 初始化conda
-std "try to init conda"
-parent=( $HOME $HOME/program $HOME/software )
-conda=( miniconda3 anaconda3 Anaconda3 )
-bin=bin/conda
-_break=false
-for p in $parent; do
-  for c in $conda; do
-    b=$p/$c/$bin
-    if [[ -f $b ]]; then
-      std "find conda binary: $b"
-      $b init zsh
-      _break=true
-      break
-    fi
-  done
-  if $_break; then break; fi
-done
+zsh $zhiyuan/scripts/conda.zsh
 
 # 切换默认shell
 std "setting zsh to default shell..."
