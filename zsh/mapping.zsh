@@ -14,6 +14,6 @@ bindkey '^[m' autosuggest-execute
 # C-T 复制文件路径
 # M-c cd到制定目录
 # C-R 复制历史命令
-source ~/.config/zhiyuan/zsh/plugins/fzf/key-bindings.zsh
+source $HOME/.config/zhiyuan/zsh/plugins/fzf/key-bindings.zsh
 
 autopair-init

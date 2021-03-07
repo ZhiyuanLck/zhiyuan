@@ -1,0 +1,21 @@
+# vim: ft=zsh
+
+zhiyuan=$HOME/.config/zhiyuan
+autoload -Uz colors && colors
+
+echoc() {
+  print -P "%F{$1}%B$2%f%b"
+}
+
+std() {
+  echoc 226 $1
+}
+
+log() {
+  echoc 40 $1
+  echo $1 >> $zhiyuan/LOG
+}
+
+err() {
+  [[ $? -ne 0 ]] && log $1
+}

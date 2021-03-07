@@ -2,7 +2,7 @@ export TERM=xterm-256color
 export EDITOR=vim
 
 # 历史命令
-HISTFILE=~/.zsh_history
+HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory

@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+zhiyuan=$HOME/.config/zhiyuan
+fpath=( $zhiyuan/zsh/functions $fpath)
+autoload -Uz rich && rich
+
+std "enter $zhiyuan"
+cd $zhiyuan
+std "updating..."
+git submodule update --remote --rebase

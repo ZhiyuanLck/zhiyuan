@@ -1,4 +1,4 @@
-autoload -U colors && colors
+autoload -Uz colors && colors
 local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ %s)"
 local prompt_path="%{$fg_bold[blue]%}%/"
 PROMPT="$prompt_path

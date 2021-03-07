@@ -52,13 +52,13 @@ function glf() { git log --all --grep="$1"; }
 
 
 # 重载
-alias reload="source ~/.zshrc"
+alias reload="source $HOME/.zshrc"
 
 # 自定义脚本
 zy() {
-  local script=$zhiyuan/scripts/$1.sh
+  local script=$zhiyuan/scripts/$1.zsh
   if [[ -f $script ]]; then
-    bash $script ${@:2} # 丢掉第一个参数
+    zsh $script ${@:2} # 丢掉第一个参数
   else
     echo "$script not found"
   fi
@@ -68,3 +68,6 @@ zy() {
 mk() {
   mkdir -p $1 && cd $1
 }
+
+# ncdu
+if has_cmd ncdu; then alias du="ncdu"; fi

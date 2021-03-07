@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 if [ -f /etc/lsb-release -o -d /etc/lsb-release.d ]; then
   OS=$(lsb_release -i | cut -d: -f2 | sed s/'^\t'//)
@@ -7,11 +7,11 @@ else
 fi
 
 packages=(git curl wget zsh
-  alacritty xclip
+  alacritty xclip ncdu
 )
 
 if [[ $OS == "Ubuntu" ]]; then
-  sudo apt install -y git curl wget zsh xclip
+  sudo apt install -y git curl wget zsh xclip ncdu
 elif [[ $OS == "Arch" ]]; then
   sudo pacman -S $packages
 fi
