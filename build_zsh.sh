@@ -10,8 +10,9 @@ else
   git pull
 fi
 cd $HOME/github/zsh
+make distclean
 autoheader
 autoconf
-./configure
+./configure --prefix=$HOME/.local
 make -j16
-sudo make install
+make install
