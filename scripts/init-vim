@@ -70,7 +70,9 @@ if ! UPDATE; then
   sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/vim 1
   sudo update-alternatives --set vi /usr/local/bin/vim
 
-  git clone git@github.com:ZhiyuanLck/vim-init.git $HOME/.vim/vim-init
-  backup $HOME/.vimrc vimrc
-  echo "source $HOME/.vim/vim-init/init.vim" > $HOME/.vimrc
+  if ! UPDATE; then
+    git clone git@github.com:ZhiyuanLck/vim-init.git $HOME/.vim/vim-init
+    backup $HOME/.vimrc vimrc
+    echo "source $HOME/.vim/vim-init/init.vim" > $HOME/.vimrc
+  fi
 fi
