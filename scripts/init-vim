@@ -1,0 +1,58 @@
+#!/usr/bin/env zsh
+# vim: ft=zsh
+
+zhiyuan=$HOME/.config/zhiyuan
+fpath=( $zhiyuan/zsh/functions $fpath)
+autoload -Uz os backup rich && rich
+
+# -u for update
+zparseopts -D -E -F u=_update
+UPDATE() {
+  [[ ${#_update} = 1 ]]
+}
+
+if os "Ubuntu"; then
+  std "installing necessary packages for building vim..."
+  packages=(
+    libncurses5-dev libgtk2.0-dev libatk1.0-dev
+    libcairo2-dev libx11-dev libxpm-dev libxt-dev
+    python3-dev ruby ruby-dev
+    lua5.3 liblua5.3-dev
+    perl libperl-dev
+  )
+  sudo apt install $packages
+
+  if UPDATE; then
+    cd $HOME/github/vim
+    git pull
+  elif [[ -d $HOME/github/vim ]]; then
+    std "clone vim repo..."
+    git clone --depth 1 https://hub.fastgit.org/vim/vim.git $HOME/github/vim
+  fi
+
+  std "run ./configure..."
+  cd $HOME/github/vim
+  if UPDATE; then
+    make distclean
+  fi
+  ./configure --with-features=huge --enable-multibyte \
+    --enable-rubyinterp=yes \
+    --enable-perlinterp=yes \
+    --enable-luainterp=yes \
+    --enable-python3interp=yes \
+    --with-python3_command=$(command -v python3) \
+    --enable-gui=gtk3 \
+    --enable-cscope \
+    --prefix=/usr/local
+  make VIMRUNTIMEDIR=/usr/local/share/vim/vim82 -j16
+  sudo make install
+fi
+
+cd $HOME
+
+if ! UPDATE; then
+  std "configuring vim..."
+  git clone git@github.com:ZhiyuanLck/vim-init.git $HOME/.vim/vim-init
+  backup $HOME/.vimrc vimrc
+  echo "source $HOME/.vim/vim-init/init.vim" > $HOME/.vimrc
+fi

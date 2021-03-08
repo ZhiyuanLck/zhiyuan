@@ -10,11 +10,11 @@ fpath=( $zhiyuan/zsh/functions $fpath)
 autoload -Uz os
 
 packages=( git curl wget zsh
-  alacritty xclip ncdu tree tmux fzf aria2
+  alacritty xclip ncdu tree tmux fzf aria2 lua5.3
 )
 
 if os "Ubuntu"; then
-  sudo apt install -y git curl wget zsh xclip ncdu tree tmux fzf aria2
+  sudo apt install -y git curl wget zsh xclip ncdu tree tmux fzf aria2 lua5.3
 elif os "Arch"; then
   sudo pacman -S $packages
 fi
