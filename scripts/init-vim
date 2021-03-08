@@ -29,7 +29,7 @@ if os "Ubuntu"; then
     std "pulling from vim repo..."
     cd $HOME/github/vim
     git pull
-  elif [[ -d $HOME/github/vim ]]; then
+  elif [[ ! -d $HOME/github/vim ]]; then
     std "clone vim repo..."
     git clone --depth 1 https://hub.fastgit.org/vim/vim.git $HOME/github/vim
   fi
