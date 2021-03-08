@@ -10,6 +10,10 @@ MODE_LOCAL() {
   [[ ${#_server} = 0 ]]
 }
 
+if ! MODE_LOCAL; then
+  mkdir -p Downloads
+fi
+
 rm -f $zhiyuan/LOG # 删除之前的log
 
 std "installing necessary packages..."

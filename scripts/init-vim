@@ -12,6 +12,9 @@ UPDATE() {
 }
 
 if os "Ubuntu"; then
+  std "removing old vim"
+  sudo apt remove vim vim-runtime gvim
+
   std "installing necessary packages for building vim..."
   packages=(
     libncurses5-dev libgtk2.0-dev libatk1.0-dev
@@ -23,11 +26,19 @@ if os "Ubuntu"; then
   sudo apt install $packages
 
   if UPDATE; then
+    std "pulling from vim repo..."
     cd $HOME/github/vim
     git pull
   elif [[ -d $HOME/github/vim ]]; then
     std "clone vim repo..."
     git clone --depth 1 https://hub.fastgit.org/vim/vim.git $HOME/github/vim
+  fi
+
+  # nodejs
+  if ! UPDATE; then
+    cd $HOME/Downloads
+    curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -
+    sudo apt install -y nodejs
   fi
 
   std "run ./configure..."
@@ -52,6 +63,11 @@ cd $HOME
 
 if ! UPDATE; then
   std "configuring vim..."
+  sudo update-alternatives --install /usr/bin/editor editor /usr/local/bin/vim 1
+  sudo update-alternatives --set editor /usr/local/bin/vim
+  sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/vim 1
+  sudo update-alternatives --set vi /usr/local/bin/vim
+
   git clone git@github.com:ZhiyuanLck/vim-init.git $HOME/.vim/vim-init
   backup $HOME/.vimrc vimrc
   echo "source $HOME/.vim/vim-init/init.vim" > $HOME/.vimrc
