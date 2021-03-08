@@ -20,7 +20,7 @@ if os "Ubuntu"; then
     libncurses5-dev libgtk2.0-dev libatk1.0-dev
     libcairo2-dev libx11-dev libxpm-dev libxt-dev
     python3-dev ruby ruby-dev
-    lua5.3 liblua5.3-dev
+    lua5.2 liblua5.2-dev
     perl libperl-dev
   )
   sudo apt install $packages
@@ -35,7 +35,9 @@ if os "Ubuntu"; then
   fi
 
   # nodejs
-  if ! UPDATE; then
+  if UPDATE; then
+    sudo apt-get --only-upgrade install nodejs
+  else
     cd $HOME/Downloads
     curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -
     sudo apt install -y nodejs
