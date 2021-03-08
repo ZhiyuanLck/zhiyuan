@@ -1,9 +1,17 @@
 #!/usr/bin/env bash
 
-sudo apt install gcc make git
+sudo apt install gcc make git libncurses5 libncurses5-dev
 sudo apt remove zsh zsh-common
 
-git clone --depth 1 https://hub.fastgit.org/zsh-users/zsh $HOME/github/zsh
+if [[ -d $HOME/github/zsh ]]; then
+  git clone --depth 1 https://hub.fastgit.org/zsh-users/zsh $HOME/github/zsh
+else
+  cd $HOME/github/zsh
+  git pull
+fi
 cd $HOME/github/zsh
-./configure && make -j16
+autoheader
+autoconf
+./configure
+make -j16
 sudo make install
