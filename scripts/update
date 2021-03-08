@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# vim: ft=zsh
 
 zhiyuan=$HOME/.config/zhiyuan
 fpath=( $zhiyuan/zsh/functions $fpath)

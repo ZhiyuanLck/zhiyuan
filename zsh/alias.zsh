@@ -56,9 +56,9 @@ alias reload="source $HOME/.zshrc"
 
 # 自定义脚本
 zy() {
-  local script=$zhiyuan/scripts/$1.zsh
+  local script=$zhiyuan/scripts/$1
   if [[ -f $script ]]; then
-    zsh $script ${@:2} # 丢掉第一个参数
+    $script ${@:2} # 丢掉第一个参数
   else
     echo "$script not found"
   fi
@@ -71,3 +71,9 @@ mk() {
 
 # ncdu
 if has_cmd ncdu; then alias du="ncdu"; fi
+
+# 防止不小心reboot
+reboot() {
+  vared -p 'Reboot? [y/N]: ' -c _reboot
+  [[ $_reboot == 'y' ]] && /sbin/reboot
+}

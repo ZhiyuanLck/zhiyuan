@@ -6,6 +6,12 @@ fpath=( $main_dir/functions $fpath)
 autoload -Uz has_cmd backup
 autoload -Uz rich && rich
 
+# 是否是在服务器上安装
+zparseopts -D -E -F s=_server
+MODE_LOCAL() {
+  [[ ${#_server} = 0 ]]
+}
+
 # fzf key-bindings
 std "downloading fzf zsh key-bindings..."
 fzf_dir=$main_dir/plugins/fzf
@@ -20,33 +26,17 @@ cnf=$cnf_dir/command-not-found.zsh
 mkdir -p $cnf_dir
 curl -o $cnf https://raw.fastgit.org/ohmyzsh/ohmyzsh/master/plugins/command-not-found/command-not-found.plugin.zsh
 
-# 备份
+# 写入zshrc
 std "backup old .zshrc and generating new"
 backup $HOME/.zshrc zshrc
 echo "source $main_dir/init.zsh" > $HOME/.zshrc
 
-# 设置tex路径
-std "try to init texlive"
-parent=( /usr/local $HOME/.local )
-for p in $parent; do
-  texlive=$p/texlive
-  if [[ -d $texlive ]]; then
-    texlive=$texlive/$(ls $texlive | grep -E "^20[0-9]{2}$")
-    if [[ -n $texlive ]]; then
-      std "find texlive path: $texlive"
-      cat << EOF >> $HOME/.zshrc
-
-export PATH=$texlive/bin/x86_64-linux:\$PATH
-export MANPATH=$texlive/texmf-dist/doc/man:\$MANPATH
-export INFOPATH=$texlive/texmf-dist/doc/info:\$INFOPATH
-EOF
-      break
-    fi
-  fi
-done
-
-# 初始化conda
-zsh $zhiyuan/scripts/conda.zsh
+if MODE_LOCAL; then
+  # 初始化tex
+  $zhiyuan/scripts/init-tex
+  # 初始化python
+  $zhiyuan/scripts/init-py
+fi
 
 # 切换默认shell
 std "setting zsh to default shell..."

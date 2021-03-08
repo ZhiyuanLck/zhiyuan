@@ -1,5 +1,4 @@
 zhiyuan=${zhiyuan:-"$HOME/.config/zhiyuan"}
-TEX=${TEX:-"/usr/local/texlive/2020"}
 fpath=( $zhiyuan/zsh/functions $fpath)
 autoload -Uz has_cmd
 

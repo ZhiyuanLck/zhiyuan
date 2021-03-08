@@ -1,8 +1,16 @@
 #!/usr/bin/env zsh
+# vim: ft=zsh
 
 zhiyuan=$HOME/.config/zhiyuan
 fpath=( $zhiyuan/zsh/functions $fpath)
-autoload -Uz backup rich && rich
+autoload -Uz has_cmd backup rich && rich
+
+# 配置pip
+if has_cmd pip; then
+  std "configuring pip..."
+  pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pip -U
+  pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+fi
 
 # 初始化conda
 std "try to init conda"
