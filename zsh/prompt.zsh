@@ -9,7 +9,7 @@ _conda() {
 }
 
 precmd() {
-  local ps1_left="$(_conda)${prompt_path}" # to be completed
+  local ps1_left="$(_conda)${prompt_path}"
   local ps1_date=$(date +"%T")
   local zero='%([BSUbfksu]|([FK]|){*})'
   local left_width=${#${(S%%)ps1_left//$~zero/}}
@@ -21,7 +21,7 @@ precmd() {
 $ps1_date
 $ret_status%b"
   else
-    PROMPT="%B$ps1_left${(l:$remain_width:: :)ps1_date}
+    PROMPT="%B$ps1_left${(l:${remain_width}:: :)ps1_date}
 $ret_status%b"
   fi
 }
