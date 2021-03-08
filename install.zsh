@@ -1,6 +1,9 @@
 #!/usr/bin/env zsh
 
+
 zhiyuan=$HOME/.config/zhiyuan
+# copy error output
+exec 2> >(tee $zhiyuan/LOG >&2)
 fpath=( $zhiyuan/zsh/functions $fpath)
 autoload -Uz has_cmd rich && rich
 
@@ -16,8 +19,7 @@ fi
 
 rm -f $zhiyuan/LOG # 删除之前的log
 
-std "installing necessary packages..."
-$zhiyuan/package.zsh
+$zhiyuan/package.zsh "$@"
 
 std "configuring git..."
 git config --global user.name "ZhiyuanLck"

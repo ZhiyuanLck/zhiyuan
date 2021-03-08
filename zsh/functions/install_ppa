@@ -1,0 +1,5 @@
+# vim: ft=zsh
+
+if ! grep -q "^deb .*$1" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+  sudo add-apt-repository ppa:$1
+fi
