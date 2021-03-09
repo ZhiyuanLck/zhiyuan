@@ -9,19 +9,24 @@ _conda() {
 }
 
 precmd() {
-  local ps1_left="$(_conda)${prompt_path}"
-  local ps1_date=$(date +"%T")
-  local zero='%([BSUbfksu]|([FK]|){*})'
-  local left_width=${#${(S%%)ps1_left//$~zero/}}
-  local left_width=$((left_width % COLUMNS))
-  local remain_width=$((COLUMNS - left_width))
-  local right_width=${#${(S%%)ps1_date//$~zero/}}
-  if [[ $remain_width -lt $right_width ]]; then
-    PROMPT="%B$ps1_left
-$ps1_date
+  if (( $ZSH_VERSION < 5.8 )); then
+    PROMPT="%B$(_conda)${prompt_path} $(date +'%T')
 $ret_status%b"
   else
-    PROMPT="%B$ps1_left${(l:${remain_width}:: :)ps1_date}
+    local ps1_left="$(_conda)${prompt_path}"
+    local ps1_date=$(date +"%T")
+    local zero='%([BSUbfksu]|([FK]|){*})'
+    local left_width=${#${(S%%)ps1_left//$~zero/}}
+    local left_width=$((left_width % COLUMNS))
+    local remain_width=$((COLUMNS - left_width))
+    local right_width=${#${(S%%)ps1_date//$~zero/}}
+    if [[ $remain_width -lt $right_width ]]; then
+      PROMPT="%B$ps1_left
+$ps1_date
 $ret_status%b"
+    else
+      PROMPT="%B$ps1_left${(l:${remain_width}:: :)ps1_date}
+$ret_status%b"
+    fi
   fi
 }
