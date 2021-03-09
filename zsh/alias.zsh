@@ -77,3 +77,15 @@ reboot() {
   vared -p 'Reboot? [y/N]: ' -c _reboot
   [[ $_reboot == 'y' ]] && /sbin/reboot
 }
+
+# 一次运行
+one() {
+  nohup "$@" >/dev/null 2>&1 &
+}
+
+# texdoc nohup
+if has_cmd texdoc; then
+  texdoc() {
+    one texdoc "$@"
+  }
+fi
