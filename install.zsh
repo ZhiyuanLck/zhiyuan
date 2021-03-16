@@ -5,7 +5,7 @@ zhiyuan=$HOME/.config/zhiyuan
 # copy error output
 exec 2> >(tee $zhiyuan/LOG >&2)
 fpath=( $zhiyuan/zsh/functions $fpath)
-autoload -Uz has_cmd rich && rich
+autoload -Uz backup has_cmd rich && rich
 
 # 是否是在服务器上安装
 if (( $ZSH_VERSION < 5.8 )); then
@@ -35,6 +35,7 @@ git submodule update --init --recursive
 std "configuring zsh..."
 $zhiyuan/zsh/bootstrap.zsh "$@"
 
+
 if MODE_LOCAL; then
   std "configuring alacritty..."
   alacritty_dir=$HOME/.config/alacritty
@@ -44,21 +45,38 @@ if MODE_LOCAL; then
 
   std "clone repo diary..."
   mkdir -p $HOME/daily
-  if [[ -d $HOME/daily/diary ]]; then
-    log "$HOME/daily/diary existed"
+  diary="$HOME/daily/diary"
+  if [[ -d $diary ]]; then
+    log "$diary existed"
   else
-    git clone git@github.com:ZhiyuanLck/diary.git
+    git clone git@github.com:ZhiyuanLck/diary.git $diary
     err "clone repo diary failed"
   fi
 fi
 
+std "clone repo note..."
+mkdir -p $HOME/daily
+note="$HOME/daily/note"
+if [[ -d $note ]]; then
+  log "$note existed"
+else
+  git clone git@github.com:ZhiyuanLck/note.git $note
+  err "clone repo note failed"
+fi
+
 # 配置tmux
-if [[ ! -d $HOME/.tmux/plugins/tmp ]]; then
-  std "backup old .tmux.conf"
-  backup $HOME/.tmux.conf tmux
-  cp $zhiyuan/tmux/.tmux.conf $HOME/.tmux.conf
+std "backup old .tmux.conf"
+backup $HOME/.tmux.conf tmux
+cp $zhiyuan/tmux/.tmux.conf $HOME/.tmux.conf
+if [[ -d $HOME/.tmux/plugins/tpm ]]; then
+  log "$HOME/.tmux/plugins/tpm existed"
+else
   git clone https://hub.fastgit.org/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
   bash $HOME/.tmux/plugins/tpm/bin/install_plugins
+fi
+
+# 配置rime
+if MODE_LOCAL; then
 fi
 
 # 标注log文件类型

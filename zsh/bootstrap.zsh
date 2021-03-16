@@ -45,4 +45,3 @@ fi
 # 切换默认shell
 std "setting zsh to default shell..."
 [[ ! $SHELL =~ "zsh" ]] && chsh -s $(which zsh)
-zsh

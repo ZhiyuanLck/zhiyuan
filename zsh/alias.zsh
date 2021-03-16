@@ -89,3 +89,20 @@ if has_cmd texdoc; then
     one texdoc "$@"
   }
 fi
+
+# note
+alias note='vim $HOME/daily/note/$(cd $HOME/daily/note && fzf)'
+
+# vim
+call_vim() {
+  if [[ $# -eq 0 ]]; then
+    vim $(fzf)
+  elif [[ -f $1 ]]; then
+    vim $1
+  elif [[ -d $1 ]]; then
+    vim $(cd $1 && fzf)
+  else
+    vim "$@"
+  fi
+}
+alias vim=call_vim

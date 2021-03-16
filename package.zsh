@@ -21,7 +21,7 @@ MODE_LOCAL() {
 
 common_packages=( git curl wget zsh
   xclip ncdu tree tmux fzf aria2 lua5.2
-  gcc cmake make ctags global
+  gcc cmake make ctags global flameshot
 )
 arch_packages=( alacritty base-devel ripgrep yay )
 yay_packages=( lazygit )
