@@ -3,7 +3,7 @@
 
 zhiyuan=$HOME/.config/zhiyuan
 fpath=( $zhiyuan/zsh/functions $fpath)
-autoload -Uz os backup rich && rich
+autoload -Uz has_cmd os backup rich && rich
 
 # -u for update
 zparseopts -D -E -F u=_update
@@ -53,7 +53,7 @@ if os "Ubuntu"; then
     --enable-perlinterp=yes \
     --enable-luainterp=yes \
     --enable-python3interp=yes \
-    --with-python3_command=$(command -v python3) \
+    --with-python3_command=/usr/bin/python3 \
     --enable-gui=gtk3 \
     --enable-cscope \
     --prefix=/usr/local
@@ -70,9 +70,11 @@ if ! UPDATE; then
   sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/vim 1
   sudo update-alternatives --set vi /usr/local/bin/vim
 
-  if ! UPDATE; then
-    git clone git@github.com:ZhiyuanLck/vim-init.git $HOME/.vim/vim-init
-    backup $HOME/.vimrc vimrc
-    echo "source $HOME/.vim/vim-init/init.vim" > $HOME/.vimrc
+  git clone git@github.com:ZhiyuanLck/vim-init.git $HOME/.vim/vim-init
+  backup $HOME/.vimrc vimrc
+  echo "source $HOME/.vim/vim-init/init.vim" > $HOME/.vimrc
+
+  if has_cmd npm; then
+    sudo npm -g install instant-markdown-d
   fi
 fi

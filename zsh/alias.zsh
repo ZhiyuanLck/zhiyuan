@@ -94,9 +94,14 @@ fi
 alias note='vim $HOME/daily/note/$(cd $HOME/daily/note && fzf)'
 
 # vim
-call_vim() {
+cvim() {
   if [[ $# -eq 0 ]]; then
-    vim $(fzf)
+    if git rev-parse --show-toplevel 2> /dev/null; then
+      dir=$(git rev-parse --show-toplevel)
+      vim $(cd $dir && fzf)
+    else
+      vim $(fzf)
+    fi
   elif [[ -f $1 ]]; then
     vim $1
   elif [[ -d $1 ]]; then
@@ -105,4 +110,3 @@ call_vim() {
     vim "$@"
   fi
 }
-alias vim=call_vim
