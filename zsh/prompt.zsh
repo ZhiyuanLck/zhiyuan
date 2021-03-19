@@ -9,7 +9,7 @@ _conda() {
 }
 
 precmd() {
-  if (( $ZSH_VERSION < 5.8 )); then
+  if (( ${ZSH_VERSION[1,3]} < 5.8 )); then
     PROMPT="%B$(_conda)${prompt_path} $(date +'%T')
 $ret_status%b"
   else

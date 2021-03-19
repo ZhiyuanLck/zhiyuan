@@ -8,7 +8,7 @@ fpath=( $zhiyuan/zsh/functions $fpath)
 autoload -Uz backup has_cmd rich && rich
 
 # 是否是在服务器上安装
-if (( $ZSH_VERSION < 5.8 )); then
+if (( ${ZSH_VERSION[1,3]} < 5.8 )); then
   zparseopts -D -E s=_server
 else
   zparseopts -D -E -F s=_server
