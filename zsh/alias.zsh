@@ -110,3 +110,6 @@ cvim() {
     vim "$@"
   fi
 }
+
+# chmode
+alias chm='sudo chmod +x'
