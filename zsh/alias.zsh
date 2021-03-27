@@ -113,3 +113,10 @@ cvim() {
 
 # chmode
 alias chm='sudo chmod +x'
+
+# go to root
+zr() {
+  if git rev-parse --show-toplevel 2> /dev/null; then
+    cd $(git rev-parse --show-toplevel)
+  fi
+}
