@@ -1,3 +1,6 @@
+# vi mode
+bindkey -v
+
 # 移动
 bindkey "^H" backward-char
 bindkey "^L" forward-char
