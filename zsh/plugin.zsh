@@ -34,12 +34,12 @@ load_plug autopair
 source $zhiyuan/zsh/plugins/command-not-found/command-not-found.zsh
 
 # vi-mode
-# 不在tmux中
-# load_plug zsh-vi-mode
-# ZVM_VI_SURROUND_BINDKEY=s-prefix
-# ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+load_plug zsh-vi-mode
+ZVM_VI_SURROUND_BINDKEY=s-prefix
+ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+ZVM_CURSOR_STYLE_ENABLED=false
 # 恢复被覆盖的快捷键
-# zvm_after_init_commands+=('source $zhiyuan/zsh/mapping.zsh')
+zvm_after_init_commands+=('source $zhiyuan/zsh/mapping.zsh')
 
 # z.lua
 eval "$(lua $zhiyuan/cli-tool/z.lua/z.lua --init zsh once enhanced)"
