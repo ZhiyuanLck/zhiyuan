@@ -7,10 +7,11 @@ autoload -Uz rich && rich
 
 std "try to init texlive"
 parent=( /usr/local $HOME/.local )
+year=2021
 for p in $parent; do
   texlive=$p/texlive
   if [[ -d $texlive ]]; then
-    texlive=$texlive/$(ls $texlive | grep -E "^20[0-9]{2}$")
+    texlive=$texlive/$year
     if [[ -n $texlive ]]; then
       std "find texlive path: $texlive"
       cat << EOF >> $HOME/.zshrc
