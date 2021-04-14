@@ -12,7 +12,7 @@ for p in $parent; do
   texlive=$p/texlive
   if [[ -d $texlive ]]; then
     texlive=$texlive/$year
-    if [[ -n $texlive ]]; then
+    if [[ -d $texlive ]]; then
       std "find texlive path: $texlive"
       cat << EOF >> $HOME/.zshrc
 
