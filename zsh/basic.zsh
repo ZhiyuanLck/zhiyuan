@@ -1,5 +1,6 @@
 export TERM=xterm-256color
 export EDITOR=vim
+export PATH=$HOME/.local/bin:$PATH
 
 # 历史命令
 HISTFILE=$HOME/.zsh_history
