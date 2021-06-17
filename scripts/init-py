@@ -31,10 +31,8 @@ for p in $parent; do
   if $_break; then break; fi
 done
 
-if [[ -n $conda_bin ]]; then
-  $conda_bin init zsh
-  backup $HOME/.condarc condarc
-  cat << 'EOF' > $HOME/.condarc
+backup $HOME/.condarc condarc
+cat << 'EOF' > $HOME/.condarc
 changeps1: False
 channels:
   - defaults
@@ -51,4 +49,3 @@ custom_channels:
   pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
   simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
 EOF
-fi
