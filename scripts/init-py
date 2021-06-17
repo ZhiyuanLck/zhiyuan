@@ -24,6 +24,7 @@ for p in $parent; do
     if [[ -f $b ]]; then
       conda_bin=$b
       std "find conda binary: $b"
+      $conda_bin init zsh
       _break=true
       break
     fi
