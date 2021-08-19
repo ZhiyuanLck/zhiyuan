@@ -137,3 +137,7 @@ zssh() {
     -L 16010:127.0.0.1:6010 \
     lck@$ip
 }
+
+gcl() {
+  git clone --depth 1 "https://hub.fastgit.org/$1"
+}
