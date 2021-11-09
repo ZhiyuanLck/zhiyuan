@@ -24,6 +24,7 @@ common_packages=( git curl wget zsh
   gcc cmake make ctags global clangd
   flameshot
 )
+server_packages=( git curl wget zsh tree tmux aria2 lua5.2 gcc cmake make ctags global)
 arch_packages=( alacritty base-devel ripgrep yay )
 yay_packages=( lazygit )
 
@@ -45,7 +46,11 @@ if os "Ubuntu"; then
   sudo apt install -y lazygit ripgrep
 
   # base tool
-  sudo apt install -y $common_packages
+  if MODE_LOCAL; then
+    sudo apt install -y $server_packages
+  else
+    sudo apt install -y $common_packages
+  fi
 elif os "Arch"; then
   sudo pacman -Syu
   sudo pacman -S $common_packages
