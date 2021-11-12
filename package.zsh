@@ -47,10 +47,9 @@ if os "Ubuntu"; then
 
   # base tool
   if MODE_LOCAL; then
-    sudo apt install -y $server_packages
-  else
     sudo apt install -y $common_packages
   fi
+  sudo apt install -y $server_packages
 elif os "Arch"; then
   sudo pacman -Syu
   sudo pacman -S $common_packages
