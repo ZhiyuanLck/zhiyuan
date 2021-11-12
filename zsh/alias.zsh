@@ -141,3 +141,7 @@ zssh() {
 gcl() {
   git clone --depth 1 "https://hub.fastgit.org/$1"
 }
+
+function gitzip() {
+  git archive -o $@.zip HEAD
+}
